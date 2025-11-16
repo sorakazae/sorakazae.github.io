@@ -1,12 +1,15 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
+<!doctype html>
 <html lang="ko">
-  <head>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <meta charset="utf-8" />
-    <title>saz.log</title>
     <meta
       name="description"
       content="개발 / 서버 / 일본 생활 같은 거 그냥 쓰는 블로그."
@@ -15,10 +18,9 @@ import Footer from "../components/Footer.astro";
   </head>
   <body>
     <Header />
-
     <main class="home">
       <section class="hero">
-        <h1>saz.log</h1>
+        <h1>sAz의 항해기록</h1>
         <p>개발 / 서버 / 일본 생활 같은 거 그냥 쓰는 블로그.</p>
       </section>
 
