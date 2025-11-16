@@ -1,16 +1,112 @@
 ---
-title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
-heroImage: '../../assets/blog-placeholder-3.jpg'
+title: "첫 게시물 : 블로그 개설과 바이브 코딩, 운영방향"
+description: "Astro로 개발 블로그를 세팅하면서 겪은 삽질과, 요즘 개발자들이 많이 하는 '바이브 코딩'에 대한 생각."
+pubDate: "2025-11-16"
+heroImage: "../../assets/blog-placeholder-000.png"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+## 📌 블로그를 왜 만들었는가
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+개발하면서 배운 것들을 정리하고 싶었지만, 정작 블로그 플랫폼 하나 제대로 고르지 못해서 계속 미뤄두고 있었다.  
+그러다 Astro + GitHub Pages 조합을 알게 되어 이번 기회에 직접 구축해보기로 했다.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+이 블로그는 **“개발하면서 부딪힌 문제를 기록하고, 나중에 다시 볼 수 있는 메모장”** 정도의 느낌으로 운영할 예정이다.
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+---
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+## 🚀 Astro + GitHub Pages 세팅하면서 겪은 삽질 기록
+
+이번 세팅 과정에서 크게 막힌 부분은 다음 세 가지였다.
+
+### 1) GitHub Pages의 기본 Jekyll 설정  
+GitHub Pages는 기본적으로 Jekyll 모드로 작동하기 때문에, Astro를 올리면 바로 에러가 터진다.  
+처음에는 왜 빌드가 실패하는지 몰랐는데, Deploy from a branch 설정의 기본 Jekyll Actions 때문이었다.
+
+**Actions를 Astro용으로 갈아엎어야 한다는 걸 뒤늦게 깨달음.**
+
+### 2) 루트가 아닌 하위 폴더에 Astro 설치  
+프로젝트를 생성하고 git을 초기화 한 것이 아닌 pages를 생성 후 git clone을 통해 레포지토리를 초기화하면
+레포지토리 루트가 아니라 폴더 내부에 설치하게되어 내부 경로가 꼬이고,  
+`npm install` / `npm run dev` 가 제대로 작동하지 않는 문제가 있었다.
+
+결국 **git clone 후 레포 내부의 모든 파일을 이동, 그 다음 Astro 설치 후 원상복구가 해결책**이었다.
+
+### 3) 레이아웃 등 기본 템플릿을 커스텀하는 난이도  
+Astro는 가볍고 빠르지만, 짜여진 기본 템플릿 구조를 변경하려면  
+`Layout.astro`, `Header.astro`, `BlogPost.astro` 등 파일 사이의 관계를 이해해야 한다.
+
+특히:
+
+- 네비게이션 바 항목 변경 및 정렬  
+- 각 페이지 내용 및 구조 수정 
+- 언어 토글 기능 구현
+
+이런 부분들이 직접 수정해보지 않으면 감이 오지 않는다.
+
+하지만 이런 삽질 덕분에 Astro 구조 전체가 훨씬 더 명확하게 잡힌 느낌이다.
+
+---
+
+## 🎧 바이브 코딩(Vibe Coding)에 대한 생각
+
+요즘 SNS나 유튜브에서 ‘바이브 코딩’이라는 말을 자주 본다.  
+이 말은 정확한 설계 없이 **“AI를 이용해 그냥 느낌 가는 대로 개발하는 방식”** 정도로 이해할 수 있다.
+
+바이브 코딩으로 이 개발 블로그를 개발해본 입장에서 느낀 점을 정리하면 다음과 같다.
+
+---
+
+### ✔️ 바이브 코딩의 장점
+
+- **몰입이 잘 된다.**
+  생각보다 개발의 “시작 장벽”이 낮아진다.
+
+- **속도가 빠르다.**
+  설계가 부족한 대신, 구현 속도가 폭발적으로 오른다.
+
+- **재미가 있다.**
+  배우는 느낌이 강해져서 개인 프로젝트에 동기부여가 생김.
+
+---
+
+### ❌ 바이브 코딩의 단점
+
+- **구조가 망가진다.**
+  프로젝트의 근본을 모르기 때문에 시간이 지나면 코드가 스파게티처럼 얽히기 쉽다.
+
+- **지식이 깊게 쌓이지 않는다.**
+  원리 이해 없이 감으로만 하게 되기 때문에 뉘양스적인 것만 이해하게 되고 직접 코드는 작성할 수 없게 된다.
+
+- **기술 부채가 쌓인다.**
+  이해가 부재인 상태로 개발하게 되면 잘못 구현하는 등 나중에 고쳐야 할 부분이 많아지고, 레거시가 빨리 생긴다.
+
+---
+
+### 🧭 그래서 어떻게 해야 할까?
+
+결론적으로는:
+
+> **“처음 20%는 바이브 코딩으로 몰입해서 시작하고, 나머지 80%는 설계와 리팩토링으로 정리하는 방식”**이 제일 효율적이라고 생각했다.
+
+나도 이번 블로그 작업을 하면서,  
+처음엔 만들고 싶은대로 막 던져놓고 → 나중에 헤더/레이아웃/언어 전환 기능을 제대로 정리했다.
+
+이렇게 **“즐거움 + 구조화”** 두 개를 균형 있게 가져가는 게 가장 좋다고 느꼈다.
+
+---
+
+## 📝 앞으로 블로그에서 다룰 내용
+
+- 개인 서버 운영 기록 및 개선점 공유 
+- Astro, Next.js, Spring Boot 등 개인 프로젝트 관련 삽질  
+- 일본 생활 및 취직/이직 관련 내용
+- 개발하면서 느낀 생각들 정리  
+- 사이드 프로젝트 진행 기록
+- 기타 유익한 정보, 잡담 등
+
+기술과 경험을 차곡차곡 쌓아가기 위한 공간으로  
+꾸준히 업데이트해볼 생각이다.
+
+이 글 또한 ChatGPT를 통한 기록하고 싶은 내용을 느낌으로만 입력 후 나온 스크립트를 약간의 수정을 거쳐 작성하였다.
+
+---
