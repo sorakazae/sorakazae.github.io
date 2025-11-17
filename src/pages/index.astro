@@ -3,6 +3,30 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+
+const latestPosts = allPosts
+  .sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  )
+  .slice(0, 3)
+  .map((post) => {
+    const fallbackSlug = post.id
+      .replace(/\.mdx?$/, "")
+      .split("/")
+      .pop();
+    return {
+      id: post.id,
+      slug: post.slug ?? fallbackSlug,
+      title: post.data.title,
+      description: post.data.description,
+      category: post.data.category,
+      pubDate: post.data.pubDate,
+    };
+  });
 ---
 
 <!doctype html>
@@ -20,8 +44,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     <Header />
     <main class="home">
       <section class="hero">
-        <h1>sAz의 항해기록</h1>
-        <p>개발 / 서버 / 일본 생활 같은 거 그냥 쓰는 블로그.</p>
+        <h1>sAz’s Owl Log</h1>
+        <p>개발, 서버 운영, 일본 생활, 잡담 등을 기록하는 블로그입니다.</p> 
       </section>
 
       <section class="home-note">
@@ -29,6 +53,24 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
           아직 정리 중인 블로그입니다. 셋업/구조 정리하면서 천천히 글을 쌓을
           예정.
         </p>
+      </section>
+      <!-- 최신 글 섹션 -->
+      <section class="latest">
+        <h2>📝 최신 글</h2>
+        <div class="post-list">
+          {latestPosts.map((post) => (
+            <a href={`/blog/${post.slug}/`} class="post-card">
+              <h3>{post.title}</h3>
+              <p class="meta">
+                <span class="category">{post.category}</span>
+                <span class="date">
+                  {new Date(post.pubDate).toLocaleDateString("ko-KR")}
+                </span>
+              </p>
+              <p class="desc">{post.description}</p>
+            </a>
+          ))}
+        </div>
       </section>
     </main>
 
@@ -57,5 +99,62 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
     margin-top: 2rem;
     opacity: 0.8;
     font-size: 0.95rem;
+  }
+
+.latest h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .post-card {
+    display: block;
+    padding: 0.9rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(10, 10, 15, 0.9);
+    text-decoration: none;
+  }
+
+  .post-card h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+  }
+
+  .post-card .meta {
+    margin: 0 0 0.4rem;
+    font-size: 0.75rem;
+    opacity: 0.8;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .post-card .category {
+    padding: 0.05rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 188, 212, 0.5);
+    font-size: 0.7rem;
+  }
+
+  .post-card .desc {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .post-card:hover {
+    border-color: rgba(0, 188, 212, 0.8);
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 </style>

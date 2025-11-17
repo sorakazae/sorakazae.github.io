@@ -3,6 +3,7 @@ title: "첫 게시물 : 블로그 개설과 바이브 코딩, 운영방향"
 description: "Astro로 개발 블로그를 세팅하면서 겪은 삽질과, 요즘 개발자들이 많이 하는 '바이브 코딩'에 대한 생각."
 pubDate: "2025-11-16"
 heroImage: "../../assets/blog-placeholder-000.png"
+category: "dev"
 ---
 
 ## 📌 블로그를 왜 만들었는가
