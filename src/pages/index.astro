@@ -101,7 +101,7 @@ const latestPosts = allPosts
     font-size: 0.95rem;
   }
 
-.latest h2 {
+  .latest h2 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
   }
@@ -116,9 +116,34 @@ const latestPosts = allPosts
     display: block;
     padding: 0.9rem 1rem;
     border-radius: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(10, 10, 15, 0.9);
     text-decoration: none;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  /* 라이트 모드용 */
+  @media (prefers-color-scheme: light) {
+    .post-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #111;
+    }
+
+    .post-card:hover {
+      border-color: rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  /* 다크 모드용 */
+  @media (prefers-color-scheme: dark) {
+    .post-card {
+      background: rgba(10, 10, 15, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f5f5f5;
+    }
+
+    .post-card:hover {
+      border-color: rgba(0, 188, 212, 0.8);
+    }
   }
 
   .post-card h3 {
@@ -145,10 +170,6 @@ const latestPosts = allPosts
     margin: 0;
     font-size: 0.9rem;
     opacity: 0.9;
-  }
-
-  .post-card:hover {
-    border-color: rgba(0, 188, 212, 0.8);
   }
 
   @media (max-width: 640px) {
