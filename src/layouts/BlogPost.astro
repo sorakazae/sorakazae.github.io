@@ -5,8 +5,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import DisqusComments from "../components/DisqusComments.astro";
 
 type Props = CollectionEntry<'blog'>['data'];
+
+const url = new URL(Astro.url.pathname, "https://saz.kr").href;
+const identifier = Astro.url.pathname;
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
@@ -80,6 +84,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					<slot />
 				</div>
 			</article>
+      <section class="comments">
+        <h2>댓글</h2>
+        <DisqusComments identifier={identifier} url={url} />
+      </section>
 		</main>
 		<Footer />
 	</body>
