@@ -11,8 +11,10 @@ const { identifier, url } = Astro.props;
 
 <script is:inline>
   var disqus_config = function () {
-    this.page.url = "${url}";
-    this.page.identifier = "${identifier}";
+    const astroUrl = "${url}";
+    const astroId = "${identifier}";
+    this.page.url = astroUrl.startsWith("$") ? window.location.href : astroUrl;
+    this.page.identifier = astroId.startsWith("$") ? window.location.pathname : astroId;
   };
 
   (function() {
