@@ -83,6 +83,8 @@ const latestPosts = allPosts
     max-width: 880px;
     margin: 0 auto;
     padding: 2rem 1.5rem 3rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .hero h1 {
@@ -110,6 +112,7 @@ const latestPosts = allPosts
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
+    width: 100%;
   }
 
   .post-card {
@@ -118,6 +121,10 @@ const latestPosts = allPosts
     border-radius: 0.75rem;
     text-decoration: none;
     transition: border-color 0.15s ease, background-color 0.15s ease;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   /* 라이트 모드용 */
@@ -176,6 +183,9 @@ const latestPosts = allPosts
     .hero {
       flex-direction: column;
       align-items: flex-start;
+    }
+    .post-card {
+      width: 100%;
     }
   }
 </style>
