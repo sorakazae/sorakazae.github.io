@@ -257,3 +257,22 @@ nav a.active {
     font-size: 0.9rem;
   }
 }
+
+/* watermark */
+.post-body p:has(img) {
+  position: relative;
+  display: inline-block;
+}
+.post-body p:has(img)::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 128px;
+  height: 64px;
+  background-image: url("/watermark.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
